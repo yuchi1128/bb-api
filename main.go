@@ -1,10 +1,8 @@
 package main
 
-import (
-	"fmt"
-	// "todo_app/config"
-	"todo_app/app/models"
-)
+import "todo_app/app/controllers"
+
+// "todo_app/config"
 
 func main() {
 	// fmt.Println(config.Config.Port)
@@ -14,15 +12,15 @@ func main() {
 
 	// log.Println("test")
 
-	fmt.Println(models.Db)
+	// fmt.Println(models.Db)
 
-	u := &models.User{}
-	u.Name = "test2"
-	u.Email = "test2@example.com"
-	u.Password = "testtest"
-	fmt.Println(u)
+	// u := &models.User{}
+	// u.Name = "test2"
+	// u.Email = "test2@example.com"
+	// u.Password = "testtest"
+	// fmt.Println(u)
 
-	u.CreateUser()
+	// u.CreateUser()
 
 	// u, _ := models.GetUser(1)
 	// fmt.Println(u)
@@ -44,14 +42,15 @@ func main() {
 	// t, _ := models.GetTodo(1)
 	// fmt.Println(t)
 
-	user, _ := models.GetUser(2)
-	user.CreateTodo("Third Todo")
+	// user, _ := models.GetUser(2)
+	// user.CreateTodo("Third Todo")
 
-	user2, _ := models.GetUser(2)
+	// user2, _ := models.GetUser(2)
 
-	todos, _ := user2.GetTodosByUser()
-	for _, v := range todos {
-		fmt.Println(v)
-	}
+	// todos, _ := user2.GetTodosByUser()
+	// for _, v := range todos {
+	// 	fmt.Println(v)
+	// }
 
+	controllers.StartMainServer()
 }
