@@ -45,3 +45,30 @@ func (u *User) GetTodos() (todos []Todo, err error) {
 	rows.Close()
 	return todos, err
 }
+
+func (u *User) GetTodosByUser() (todos []Todo, err error) {
+	cmd := `SELECT id, content, user_id, created_at FROM todos WHERE user_id = ? ORDER BY created_at DESC LIMIT ?`
+	rows, err := Db.Query(cmd, u.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	for rows.Next() {
+		var todo Todo
+		err = rows.Scan(&todo.ID, &todo.Content, &todo.UserID, &todo.CreatedAt)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		todos = append(todos, todo)
+	}
+	rows.Close()
+	return todos, err
+}
+
+func (t *Todo) UpdateTodo() (err error) {
+	cmd := `UPDATE todos SET content = ? WHERE id = ?`
+	_, err = Db.Exec(cmd, t.Content, t.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return err
+}
